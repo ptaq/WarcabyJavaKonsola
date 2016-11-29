@@ -5,6 +5,7 @@
  */
 package warcaby;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Warcaby {
@@ -62,17 +63,28 @@ public class Warcaby {
     void wprowadzWartosci() {
 
         boolean pomoc = true;
-        Scanner odczyt = new Scanner(System.in);
+        Scanner odczyt;
 
         while (pomoc) {
+            try{
+            odczyt = new Scanner(System.in);
             ruch[0] = odczyt.nextInt();
             ruch[1] = odczyt.nextInt();
 
             if (ruch[0] < 8 && ruch[1] < 8 && ruch[0] >= 0 && ruch[1] >= 0) {
                 pomoc = false;
             } else {
-                System.out.println("NieprawidÅ‚owe wartosÄ‡ii!");
+                
+                System.out.println("Nieprawid³owe wartosci!");
 
+            }
+            }catch(InputMismatchException e){
+                
+                System.out.println("Poda³eœ z³¹ wartoœæ");
+                
+                
+                
+                
             }
 
         }
