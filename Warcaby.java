@@ -21,19 +21,6 @@ public class Warcaby {
         {2, 0, 2, 0, 2, 0, 2, 0}
 
     };
-   /* private int szachownica[][] = {
-        {0, 1, 0, 0, 0, 1, 0, 0},
-        {6, 0, 2, 0, 0, 0, 2, 6},
-        {0, 0, 0, 0, 0, 1, 0, 0},
-        {6, 0, 2, 1, 0, 0, 1, 6},
-        {0, 0, 2, 0, 0, 2, 1, 0},
-        {6, 0, 2, 2, 0, 2, 0, 2},
-        {0, 0, 2, 3, 0, 2, 1, 0},
-        {2, 0, 0, 0, 2, 0, 0, 0}
-
-    };*/
-    
-
     private int ruch[] = new int[2];          //tablica do przechowywania ruchów
 
     private final int pierwszy = 1;           //białe są reprezentowane jako 1 i 1*3
@@ -64,10 +51,10 @@ public class Warcaby {
 
     void wygrana() {
         if (this.pionkiPierwszy >= 12) {
-            System.out.println("WYGRAŁ GRACZ PIERWSZY !!!!!! ");
+            System.out.println("WYGRA�? GRACZ PIERWSZY !!!!!! ");
             System.exit(0);
         } else if (this.pionkiDrugi >= 12) {
-            System.out.println("WYGRAŁ GRACZ PIERWSZY !!!!!! ");
+            System.out.println("WYGRA�? GRACZ PIERWSZY !!!!!! ");
             System.exit(0);
         }
     }
@@ -381,13 +368,13 @@ public class Warcaby {
 
                     pomoc = false;
                     dodawanieZbic(kolor);
-                    //System.out.println("duda dubi da "+this.szachownica[k][l]+ " "+(kolor * 3));
+                   
                     if (this.szachownica[gdzieRuszycWiersz][gdzieRuszycKolumna] == (kolor * 3)) {
-                        //System.out.println("abc");
+                       
                         czyIstniejeKolejneBicieKrolowej(gdzieRuszycWiersz, gdzieRuszycKolumna, kolor);
-                        //System.out.println("def");
+                       
                     } else {
-                        pionkiemBicieWielokrotne(kolor);          //jak w nazwie metody
+                        pionkiemBicieWielokrotne(kolor);          
                     }
                 } else {
                     System.out.println("Niedozwolony ruch(bicie) !");
@@ -458,29 +445,26 @@ public class Warcaby {
 
     private void czyIstniejeKolejneBicieKrolowej(int k, int l, int kolor) {     //wywoluje metode "pentelka" zmieniajac pierwsze 2 parametry,
         pentelkaSprawdzajacaKolejneBicieKrolowej(1, 1, k, l, kolor);                                        //dzieki czemu robimy ruch w kazdym kierunku po skosie
-        //  System.out.println("1");
+      
         pentelkaSprawdzajacaKolejneBicieKrolowej(-1, 1, k, l, kolor);
-        // System.out.println("2");
+       
         pentelkaSprawdzajacaKolejneBicieKrolowej(1, -1, k, l, kolor);
-        // System.out.println("3");
+      
         pentelkaSprawdzajacaKolejneBicieKrolowej(-1, -1, k, l, kolor);
-        // System.out.println("4");
+        
 
     }
 
     private void pentelkaSprawdzajacaKolejneBicieKrolowej(int a, int b, int k1, int l1, int kolor) {      //sprawdza czy na drodze jest pionek przeciwnika, jesli tak to sprawdza
         int j = l1, pomo=0;                                                        //czy nastepne pole za pionkiem jest wolne, jesli znowu tak, to wywoluje    
         boolean x = true, y = true;
-        //System.out.println(a+"=a b="+b+" k1="+k1+" l1="+l1+" kolor="+kolor);
+       
         for (int i = k1; 0 <= i && i <= 7; i += a) {                                 //metode krolowa z info, ze mozliwe jest kolejne bicie
-            //System.out.println(i+"<i j>"+ j+" kolor>"+kolor+"       pole>"+this.szachownica[i][j]);
+    
             if (this.szachownica[i][j] == kolor || this.szachownica[i][j] == kolor * 3){
                 pomo++;
                 if (pomo>=2) i=7;
-                //System.out.println(i+" "+j);
-                //break;
-                //i=7;
-                
+            
             }
             if (this.szachownica[i][j] != kolor && this.szachownica[i][j] != kolor * 3 && this.szachownica[i][j] != 0 && 0 < i && i < 7 && 0 < j && j < 7) {
                 if (this.szachownica[i + a][j + b] == 0) {
@@ -509,21 +493,17 @@ public class Warcaby {
             gdzieRuszycWiersz = ruch[0];
             gdzieRuszycKolumna = ruch[1];
 
-            // System.out.println(" k-"+gdzieRuszycWiersz+" l-"+gdzieRuszycKolumna+" k1-"+k1+" l1-"+l1);
+        
             k2 = gdzieRuszycWiersz - k1;
             l2 = gdzieRuszycKolumna - l1;
-            //System.out.println(k1+" "+l1+" "+k2+" "+l2);
-            if (0 < k2 && 0 < l2) {                        //++
-                //System.out.println("1");
+          
+            if (0 < k2 && 0 < l2) {                        //++       
                 y = sprawdzWartosciKolejnegoBiciaKrolowej(1, 1, k1, l1, kolor);
             } else if (0 < k2 && 0 > l2) {                     //+-
-                // System.out.println("2");
                 y = sprawdzWartosciKolejnegoBiciaKrolowej(1, -1, k1, l1, kolor);
             } else if (0 > k2 && 0 < l2) {                     //-+
-                // System.out.println("3");
                 y = sprawdzWartosciKolejnegoBiciaKrolowej(-1, 1, k1, l1, kolor);
             } else if (0 > k2 && 0 > l2) {                  //--
-                // System.out.println("4");
                 y = sprawdzWartosciKolejnegoBiciaKrolowej(-1, -1, k1, l1, kolor);
             }
             if (y) {
@@ -536,14 +516,12 @@ public class Warcaby {
     private boolean sprawdzWartosciKolejnegoBiciaKrolowej(int a, int b, int k1, int j, int kolor) {
         int c = 0, d = 0;
         for (int i = k1; 0 <= i && i <= 7; i += a) {
-            //System.out.println(i+"<i j>"+ j);
             if (this.szachownica[i][j] != 0) {
                 d++;
             }
             if (this.szachownica[i][j] != kolor && this.szachownica[i][j] != kolor * 3 && this.szachownica[i][j] != 0) {
                 c++;
             }
-            //System.out.println(i+"=i j="+j+" c="+c+" d="+d);
             if (i == gdzieRuszycWiersz && j == gdzieRuszycKolumna && 0 < c && c < 2 && d < 3) {
                 return false;
             }
